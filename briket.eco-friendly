@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BRICO - Briket Ramah Lingkungan Berbasis AI | Universitas Negeri Malang</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2E7D32;
+            --secondary: #795548;
+            --accent: #FFC107;
+            --light: #F5F5F5;
+            --dark: #212121;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        header {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1580587771525-78b9dba3b914?ixlib=rb-4.0.3&auto=format&fit=crop&w=1740&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 1rem 5%;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo img {
+            height: 50px;
+        }
+        
+        .logo h1 {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+        
+        .hero {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            max-width: 800px;
+            padding: 2rem 0;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+        
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            max-width: 700px;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--accent);
+            color: var(--dark);
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 1.1rem;
+        }
+        
+        .btn:hover {
+            background-color: #ffb300;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+        
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--accent);
+            color: var(--accent);
+            margin-left: 15px;
+        }
+        
+        .btn-outline:hover {
+            background-color: var(--accent);
+            color: var(--dark);
+        }
+        
+        section {
+            padding: 5rem 10%;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background-color: var(--accent);
+        }
+        
+        .section-title p {
+            max-width: 700px;
+            margin: 1rem auto 0;
+            font-size: 1.1rem;
+            color: #555;
+        }
+        
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .feature-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .feature-img {
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .feature-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .feature-card:hover .feature-img img {
+            transform: scale(1.1);
+        }
+        
+        .feature-content {
+            padding: 1.5rem;
+        }
+        
+        .feature-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+        
+        .feature-content p {
+            margin-bottom: 1.5rem;
+            color: #555;
+        }
+        
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            background-color: var(--primary);
+            color: white;
+            padding: 4rem 10%;
+            text-align: center;
+        }
+        
+        .stat-item h3 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .team {
+            background-color: #f9f9f9;
+        }
+        
+        .team-members {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        
+        .team-member {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .team-img {
+            height: 250px;
+            overflow: hidden;
+        }
+        
+        .team-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .team-info {
+            padding: 1.5rem;
+        }
+        
+        .team-info h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+        
+        .team-info p {
+            color: var(--secondary);
+            font-weight: 500;
+        }
+        
+        .contact {
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: white;
+            text-align: center;
+            padding: 5rem 10%;
+        }
+        
+        .contact h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .contact p {
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            font-size: 1.1rem;
+        }
+        
+        .contact .btn {
+            background-color: var(--accent);
+            color: var(--dark);
+            font-size: 1.2rem;
+            padding: 15px 40px;
+        }
+        
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 3rem 10% 1rem;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .footer-logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--accent);
+        }
+        
+        .footer-about p {
+            margin-bottom: 1rem;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        
+        .social-links a:hover {
+            background-color: var(--accent);
+            color: var(--dark);
+            transform: translateY(-5px);
+        }
+        
+        .footer-links h3 {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .footer-links h3::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background-color: var(--accent);
+        }
+        
+        .footer-links ul {
+            list-style: none;
+        }
+        
+        .footer-links ul li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .footer-links ul li a {
+            color: #ddd;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        
+        .footer-links ul li a:hover {
+            color: var(--accent);
+            padding-left: 5px;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            section {
+                padding: 3rem 5%;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+            
+            .btn-outline {
+                margin-left: 0;
+                margin-top: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <i class="fas fa-leaf fa-2x" style="color: #4CAF50;"></i>
+                <h1>BRICO</h1>
+            </div>
+            <div class="nav-links">
+                <a href="#about">Tentang</a>
+                <a href="#features">Produk</a>
+                <a href="#ai">Teknologi AI</a>
+                <a href="#team">Tim</a>
+                <a href="#contact">Kontak</a>
+            </div>
+        </nav>
+        
+        <div class="hero">
+            <h1>OPTIMALISASI ARTIFICIAL INTELLIGENCE DALAM PENGUATAN BRANDING PRODUK BRICO</h1>
+            <p>Briket Ramah Lingkungan Berbasis Limbah Pertanian dengan Integrasi Kecerdasan Buatan</p>
+            <div>
+                <a href="#features" class="btn">Pelajari Produk</a>
+                <a href="#ai" class="btn btn-outline">Teknologi AI Kami</a>
+            </div>
+        </div>
+    </header>
+    
+    <section id="about">
+        <div class="section-title">
+            <h2>Tentang BRICO</h2>
+            <p>Inovasi briket berbahan dasar limbah organik lokal yang diformulasikan secara ilmiah untuk menghasilkan energi bersih, efisien, dan ramah lingkungan</p>
+        </div>
+        
+        <div class="features">
+            <div class="feature-card">
+                <div class="feature-img">
+                    <img src="https://images.unsplash.com/photo-1586773860418-d37222d8fce3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1473&q=80" alt="Bahan Baku">
+                </div>
+                <div class="feature-content">
+                    <h3>Bahan Baku Lokal</h3>
+                    <p>Memanfaatkan limbah pertanian seperti batok kelapa, sekam padi, serbuk kayu nangka, kulit pisang, dan tapioka yang melimpah di Kabupaten Malang</p>
+                    <a href="#" class="btn">Pelajari Lebih Lanjut</a>
+                </div>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-img">
+                    <img src="https://images.unsplash.com/photo-1580584126903-c17dac304a51?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80" alt="Keunggulan Produk">
+                </div>
+                <div class="feature-content">
+                    <h3>Keunggulan Produk</h3>
+                    <p>Panas stabil dan nyala tahan lama (5 jam), bebas bau menyengat, sisa abu dapat dijadikan pupuk organik, kemasan biodegradable</p>
+                    <a href="#" class="btn">Lihat Spesifikasi</a>
+                </div>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-img">
+                    <img src="https://images.unsplash.com/photo-1677442135722-5f0341f6c4d7?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80" alt="AI Integration">
+                </div>
+                <div class="feature-content">
+                    <h3>Integrasi AI</h3>
+                    <p>Maskot interaktif "Bro Brico" dan barcode pada gantungan kunci yang memberikan akses ke informasi produk dan chatbot AI dalam dua bahasa</p>
+                    <a href="#ai" class="btn">Coba Fitur AI</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <div class="stats">
+        <div class="stat-item">
+            <h3>5 Jam</h3>
+            <p>Durasi Pembakaran</p>
+        </div>
+        <div class="stat-item">
+            <h3>66.67%</h3>
+            <p>Return on Investment</p>
+        </div>
+        <div class="stat-item">
+            <h3>1.5 Bulan</h3>
+            <p>Payback Period</p>
+        </div>
+        <div class="stat-item">
+            <h3>600kg</h3>
+            <p>Target Penjualan/Bulan</p>
+        </div>
+    </div>
+    
+    <section id="ai">
+        <div class="section-title">
+            <h2>Integrasi Artificial Intelligence</h2>
+            <p>Memanfaatkan kecerdasan buatan untuk penguatan branding dan pengalaman konsumen</p>
+        </div>
+        
+        <div class="features">
+            <div class="feature-card">
+                <div class="feature-img">
+                    <img src="https://images.unsplash.com/photo-1635070041078-e363dbe005cb?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80" alt="AI Branding">
+                </div>
+                <div class="feature-content">
+                    <h3>AI untuk Branding</h3>
+                    <p>Pembuatan logo dan maskot "Bro Brico" dengan bantuan ChatGPT untuk prompt kreatif dan Leonardo AI untuk visualisasi</p>
+                    <a href="#" class="btn">Lihat Proses</a>
+                </div>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-img">
+                    <img src="https://images.unsplash.com/photo-1626785774573-4b799315345d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1491&q=80" alt="Chatbot">
+                </div>
+                <div class="feature-content">
+                    <h3>Chatbot Multibahasa</h3>
+                    <p>Fitur interaktif berbasis AI yang dapat diakses melalui scan barcode pada gantungan kunci produk</p>
+                    <a href="#" class="btn">Coba Demo</a>
+                </div>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-img">
+                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80" alt="Marketing">
+                </div>
+                <div class="feature-content">
+                    <h3>Strategi Pemasaran</h3>
+                    <p>Pemanfaatan AI dalam analisis pasar, personalisasi konten, dan kampanye pemasaran digital</p>
+                    <a href="#" class="btn">Lihat Strategi</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="team" class="team">
+        <div class="section-title">
+            <h2>Tim BRICO</h2>
+            <p>Mahasiswa Universitas Negeri Malang yang berdedikasi menciptakan solusi energi berkelanjutan</p>
+        </div>
+        
+        <div class="team-members">
+            <div class="team-member">
+                <div class="team-img">
+                    <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&auto=format&fit=crop&w=1376&q=80" alt="Najwa Febi Kharisma">
+                </div>
+                <div class="team-info">
+                    <h3>Najwa Febi Kharisma</h3>
+                    <p>Ketua Tim | Manajemen</p>
+                    <p>NIM: 230413605631</p>
+                </div>
+            </div>
+            
+            <div class="team-member">
+                <div class="team-img">
+                    <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-4.0.3&auto=format&fit=crop&w=1376&q=80" alt="Rela Rahayu">
+                </div>
+                <div class="team-info">
+                    <h3>Rela Rahayu</h3>
+                    <p>Anggota | Manajemen</p>
+                    <p>NIM: 230413609379</p>
+                </div>
+            </div>
+            
+            <div class="team-member">
+                <div class="team-img">
+                    <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&auto=format&fit=crop&w=1374&q=80" alt="Shifriyatul Wahdah">
+                </div>
+                <div class="team-info">
+                    <h3>Shifriyatul Wahdah</h3>
+                    <p>Anggota | Pendidikan IPA</p>
+                    <p>NIM: 230351601028</p>
+                </div>
+            </div>
+            
+            <div class="team-member">
+                <div class="team-img">
+                    <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&auto=format&fit=crop&w=1374&q=80" alt="Dosen Pembimbing">
+                </div>
+                <div class="team-info">
+                    <h3>Tatas Ridho Nugroho, S.Pd., M.Pd., M.Ak</h3>
+                    <p>Dosen Pembimbing</p>
+                    <p>NIP: 198903112023211019</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="contact" class="contact">
+        <h2>Siap Berkolaborasi dengan BRICO?</h2>
+        <p>Untuk informasi lebih lanjut, kemitraan, atau pertanyaan seputar produk dan proposal bisnis kami</p>
+        <a href="mailto:najwa.febi.2304136@students.um.ac.id" class="btn">Hubungi Kami</a>
+    </section>
+    
+    <footer>
+        <div class="footer-content">
+            <div class="footer-about">
+                <div class="footer-logo">BRICO</div>
+                <p>Inovasi briket ramah lingkungan berbasis limbah pertanian dengan integrasi kecerdasan buatan untuk penguatan branding dan pengalaman konsumen.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-links">
+                <h3>Link Cepat</h3>
+                <ul>
+                    <li><a href="#about">Tentang BRICO</a></li>
+                    <li><a href="#features">Produk & Fitur</a></li>
+                    <li><a href="#ai">Teknologi AI</a></li>
+                    <li><a href="#team">Tim Kami</a></li>
+                    <li><a href="#contact">Kontak</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-links">
+                <h3>Dokumen</h3>
+                <ul>
+                    <li><a href="#">Proposal Lengkap</a></li>
+                    <li><a href="#">Business Model Canvas</a></li>
+                    <li><a href="#">Analisis Keuangan</a></li>
+                    <li><a href="#">Sertifikasi Produk</a></li>
+                    <li><a href="#">Surat Pernyataan Orisinalitas</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-links">
+                <h3>Kontak</h3>
+                <ul>
+                    <li><i class="fas fa-envelope"></i> najwa.febi.2304136@students.um.ac.id</li>
+                    <li><i class="fas fa-phone"></i> 082332921233</li>
+                    <li><i class="fas fa-map-marker-alt"></i> Universitas Negeri Malang, Kota Malang</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            <p>© 2025 BRICO - Tim Mahasiswa Universitas Negeri Malang. Proposal Business Plan untuk National Economics Competition 2025.</p>
+        </div>
+    </footer>
+</body>
+</html>
